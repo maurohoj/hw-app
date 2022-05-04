@@ -70,16 +70,20 @@ jobs:
     - name: Configure Docker
       run: gcloud auth configure-docker --quiet
     
-    #Get GKE credentials
-    - name: Set up GKE credentials
-      uses: google-github-actions/get-gke-credentials@v0
+    # Get the GKE credentials so we can deploy to the cluster
+    - uses: google-github-actions/get-gke-credentials@v0.2.1
       with:
         cluster_name: ${{ env.GKE_CLUSTER }}
         location: ${{ env.GKE_ZONE }}
-   
-    #- name: set privileges
-    #  run: gcloud projects add-iam-policy-binding 46364866574 --member=serviceAccount:46364866574@cloudbuild.gserviceaccount.com --role=roles/container.developer
-
+        credentials: ${{ secrets.GKE_CREDENTIALS }}
+    
+    #Get GKE credentials
+    #- name: Set up GKE credentials
+    #  uses: google-github-actions/get-gke-credentials@v0
+    #  with:
+    #    cluster_name: ${{ env.GKE_CLUSTER }}
+    #    location: ${{ env.GKE_ZONE }}
+        
     # Build the Docker image
     - name: Build
       run: |-
