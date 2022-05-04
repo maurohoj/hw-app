@@ -1,0 +1,23 @@
+name: GCP
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    name: Setup Gcloud Account
+    runs-on: ubuntu-latest
+    environment: poc-luizalabs
+    env:
+      IMAGE_NAME: gcr.io/${{ secrets.GKE_PROJECT }}/site:latest
+    steps:
+      # Git checkout
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      # Login to GCP
+      - uses: google-github-actions/setup-gcloud@v0.2.0
+        with:
+          service_account_key: ${{ secrets.GKE_CREDENTIALS }}
+          project_id: ${{ secrets.GKE_PROJECT }}
