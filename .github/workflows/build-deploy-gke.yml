@@ -24,7 +24,7 @@ env:
   GKE_ZONE: us-central1-a   # TODO: update to cluster zone
   DEPLOYMENT_NAME: hello-server # TODO: update to deployment name
   REPOSITORY: hello-app # TODO: update to Artifact Registry docker repository
-  IMAGE: hello
+  IMAGE: hello-app
 
 jobs:
   setup-build-publish-deploy:
