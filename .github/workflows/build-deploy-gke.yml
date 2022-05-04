@@ -77,8 +77,8 @@ jobs:
         cluster_name: ${{ env.GKE_CLUSTER }}
         location: ${{ env.GKE_ZONE }}
    
-    - name: set privileges
-      run: gcloud projects add-iam-policy-binding 46364866574 --member=serviceAccount:46364866574@cloudbuild.gserviceaccount.com --role=roles/container.developer
+    #- name: set privileges
+    #  run: gcloud projects add-iam-policy-binding 46364866574 --member=serviceAccount:46364866574@cloudbuild.gserviceaccount.com --role=roles/container.developer
 
     # Build the Docker image
     - name: Build
