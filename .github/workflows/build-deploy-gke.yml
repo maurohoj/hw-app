@@ -122,11 +122,11 @@ jobs:
     #- name: Kube list pods
     #  run: kubectl get pods -A
 
-    #- name: Delete hello-app deployment
-    #  run: kubectl delete service hello-server
+    - name: Delete hello-app service
+      run: kubectl delete service hello-server
 
-    #- name: Delete hello-app deployment
-    #  run: kubectl delete deployment hello-server    
+    - name: Delete hello-app deployment
+      run: kubectl delete deployment hello-server    
 
     - name: Deploy new version
       run: kubectl create deployment hello-server --image=$GAR_LOCATION-docker.pkg.dev/$PROJECT_ID/$REPOSITORY/$IMAGE:$GITHUB_SHA
