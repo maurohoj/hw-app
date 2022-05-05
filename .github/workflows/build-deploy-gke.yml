@@ -92,10 +92,15 @@ jobs:
           --build-arg GITHUB_SHA="$GITHUB_SHA" \
           --build-arg GITHUB_REF="$GITHUB_REF" \
           .
+    #Auth Docker
+    - name: Login Docker
+      run: gcloud auth configure-docker us-central1-docker.pkg.dev
+      
     # Push the Docker image to Google Artifact Registry
     - name: Publish
       run: |-
         docker push "$GAR_LOCATION-docker.pkg.dev/$PROJECT_ID/$REPOSITORY/$IMAGE:$GITHUB_SHA"
+        
     # Set up kustomize
     - name: Set up Kustomize
       run: |-
