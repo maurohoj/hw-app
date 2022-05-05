@@ -118,6 +118,12 @@ jobs:
     
     - name: GET credential Kube
       run: gcloud container clusters get-credentials primary --zone=us-central1-a
+    
+    - name: Kube list pods
+      run: kubectl get pods -A
+    
+    - name: Delete hello-app
+      run: kubectl delete service hello-server
       
     # Deploy the Docker image to the GKE cluster
     #- name: Deploy
