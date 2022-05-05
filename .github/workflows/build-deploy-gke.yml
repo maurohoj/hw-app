@@ -126,7 +126,7 @@ jobs:
     #  run: kubectl delete service hello-server
     
     - name: Delete hello-app deployment
-      run: gcloud container clusters delete hello-cluster
+      run: gcloud container clusters delete hello-cluster --zone=us-central1-a
       
     # Deploy the Docker image to the GKE cluster
     #- name: Deploy
