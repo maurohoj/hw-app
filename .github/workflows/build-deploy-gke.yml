@@ -1,10 +1,12 @@
 name: Build and Deploy to GKE
 
+#Sempre que acontecer um commit na branch master o job será startado
 on:
   push:
     branches:
       - master
 
+#Env Variables
 env:
   PROJECT_ID: ${{ secrets.GKE_PROJECT }}
   GAR_LOCATION: us-central1
@@ -69,7 +71,8 @@ jobs:
     #  run: |-
     #    curl -sfLo kustomize https://github.com/kubernetes-sigs/kustomize/releases/download/v3.1.0/kustomize_3.1.0_linux_amd64
     #    chmod u+x ./kustomize
-        
+
+    #Install Kubectl    
     - name: Install Kube
       run: |- 
         sudo apt-get install -y apt-transport-https
@@ -79,20 +82,23 @@ jobs:
         sudo apt-get update
         sudo apt-get install -y kubectl
     
+    #Get credentials Kubernetes
     - name: GET credential Kube
       run: gcloud container clusters get-credentials primary --zone=us-central1-a
 
     #- name: Delete hello-app service
     #  run: kubectl delete service hello-server
 
+    #Delete Deplyment of Hello-app
     - name: Delete hello-app deployment
       run: kubectl delete deployment hello-server    
 
+    #Deploy new version of Hello-app
     - name: Deploy new version
       run: kubectl create deployment hello-server --image=$GAR_LOCATION-docker.pkg.dev/$PROJECT_ID/$REPOSITORY/$IMAGE:$GITHUB_SHA
       
-    - name: Deploy Service
-      run: kubectl expose deployment hello-server --type LoadBalancer --port 80 --target-port 8080
+    #- name: Deploy Service
+    #  run: kubectl expose deployment hello-server --type LoadBalancer --port 80 --target-port 8080
       
     # Deploy the Docker image to the GKE cluster
     #- name: Deploy
