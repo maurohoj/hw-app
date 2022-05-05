@@ -122,8 +122,8 @@ jobs:
     - name: Kube list pods
       run: kubectl get pods -A
     
-    - name: Delete hello-app service
-      run: kubectl delete service hello-server
+    #- name: Delete hello-app service
+    #  run: kubectl delete service hello-server
     
     - name: Delete hello-app deployment
       run: gcloud container clusters delete hello-cluster
