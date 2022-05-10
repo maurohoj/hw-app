@@ -97,8 +97,8 @@ jobs:
     - name: Deploy new version
       run: kubectl create deployment hello-server --image=$GAR_LOCATION-docker.pkg.dev/$PROJECT_ID/$REPOSITORY/$IMAGE:$GITHUB_SHA
       
-    - name: Deploy Service
-      run: kubectl expose deployment hello-server --type ClusterIP --port 80 #--target-port 8080
+    #- name: Deploy Service
+    #  run: kubectl expose deployment hello-server --type ClusterIP --port 80 #--target-port 8080
       
     # Deploy the Docker image to the GKE cluster
     #- name: Deploy
